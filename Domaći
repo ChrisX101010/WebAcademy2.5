@@ -106,3 +106,24 @@ blockchain.addBlock(new Block(3, new Date().toISOString(), "Transaction Data 3")
 blockchain.chain.forEach(block => {
     console.log(block.toString());
 });
+-----------------------------------------------------------------------------------------------------------------------
+3a) TRANSAKCIJE + FRONT (HTML + JS)
+// HTML
+<div id="output"></div>
+// JS
+class SimpleSmartContract {
+    constructor() {
+        this.storedData = 0;
+    }
+    set(x) {
+        this.storedData = x;
+    }
+    get() {
+        return this.storedData;
+    }
+}
+
+const contract = new SimpleSmartContract();
+document.getElementById("output").innerHTML += "Initial value: " + contract.get() + "<br>";
+contract.set(42);
+document.getElementById("output").innerHTML += "New value: " + contract.get();
