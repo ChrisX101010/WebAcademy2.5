@@ -127,3 +127,38 @@ const contract = new SimpleSmartContract();
 document.getElementById("output").innerHTML += "Initial value: " + contract.get() + "<br>";
 contract.set(42);
 document.getElementById("output").innerHTML += "New value: " + contract.get();
+----------------------------------------------------------------------------------------------------------------------
+3b) CHECK WHY CODE DOES NOT WORK:
+// HTML
+<script src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.6.0/web3.min.js"></script>
+<div id="output"></div>
+// JS
+const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
+async function fetchNetworkInfo() {
+	const networkId = await web3.eth.net.getId();
+  let networkName;
+  switch (networkId) {
+  	case 1:
+    	networkName = "Mainnet";
+      break;
+    case 3:
+    	networkName = "Ropsten Testnet";
+      break;
+    case 4:
+    	networkName = "Rinkeby Testnet";
+      break;
+    case 42:
+    	networkName = "Kovan Testnet";
+      break;
+   default:
+    	networkName = "Unknown";
+  }
+  return { networkId, networkName };
+}
+
+async function showNetworkInfo() {
+	const { networkId, networkName } = await fetchNetworkInfo();
+  document.getElementById("output").innerText = 'Connected to ${networkName} (ID: ${networkId})';
+}
+
+showNetworkInfo();
